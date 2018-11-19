@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quote Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-danger bg-danger">
+    <h1 class="display-6" style="color:black">Hello {{username.first_name}}</h1>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <p class="lead" style="color:skyblue"></p>
+        <form>
+            <p><a href="/logout">Logout</a> <a class="btn btn-danger btn-sm" href="/create_job" role="button">New
+                    Job</a></p>
+        </form>
+    </div>
+</nav>
+
+<body>
+    <div class="container">
+        <table class="table table-striped" style="border: 3px solid skyblue">
+        <thead>
+            <tr>
+                <th scope="col">Job</th>
+                <th scope="col">Location</th>
+                <th scope="col">Actions</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in allthejobs %}
+            <tr>
+                <td>{{x.title}}</th>
+                <td>{{x.desc}}</td>
+                <td>{{x.location}}</td>
+                <td><a href="/jobs/{{x.id}}">View</a> |{% if username.id == x.user.id %} <a href="/delete/{{x.id}}">Remove</a> | <a
+                        href="/jobs/edit/{{x.id}}">Edit</a> |{% endif %}  <a href="/create_job">Add</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</body>
